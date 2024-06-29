@@ -1,0 +1,9 @@
+# config/sidekiq.yml
+
+:concurrency: 5
+:scheduler:
+  :schedule:
+    email_reminder:
+      cron: '0 * * * *'   # Runs every hour
+      class: EmailReminderWorker
+      queue: default
