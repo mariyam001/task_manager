@@ -55,7 +55,7 @@
                     <%= task.state %>
                   </span>
                 </td>
-                <td><%= task.deadline.strftime('%Y-%m-%d %H:%M') %></td>
+                <td><%= task.deadline.strftime('%d-%m-%Y - %I:%M %p') %></td>
                 <td class="d-flex ">
                    <button type="button" class="btn btn-primary edit-task-btn" data-bs-toggle="modal" data-bs-target="#editTaskModal-<%= task.id %>">
                     <i class="fa fa-edit"></i> 

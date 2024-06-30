@@ -22,8 +22,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-     @task = current_user.tasks.build(task_params)
-
+    @task = current_user.tasks.build(task_params)
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_url, notice: "Task was successfully created." }

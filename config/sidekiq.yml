@@ -4,7 +4,7 @@
 :scheduler:
   :schedule:
     email_reminder_worker:
-      cron: "0 * * * *" # Runs every hour
+      cron: "0 * * * *"
       class: EmailReminderWorker
       queue: default
       description: "Send email reminders 1 day and 1 hour before task deadlines"
