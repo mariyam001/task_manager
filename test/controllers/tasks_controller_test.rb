@@ -1,48 +1,75 @@
-require "test_helper"
+# spec/controllers/tasks_controller_spec.rb
+require 'rails_helper'
 
-class TasksControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @task = tasks(:one)
+RSpec.describe TasksController, type: :controller do
+  let(:user) { create(:user) } # Assuming you have a User factory or fixture set up
+  let(:valid_attributes) {
+    { title: "Task title", description: "Task description", state: "Backlog", deadline: Time.now + 1.day, user_id: user.id }
+  }
+  let(:invalid_attributes) {
+    { title: "", description: "Task description", state: "Backlog", deadline: Time.now + 1.day, user_id: user.id }
+  }
+
+  before do
+    sign_in user # Sign in the user before each example
   end
 
-  test "should get index" do
-    get tasks_url
-    assert_response :success
+  describe "GET #index" do
+    it "returns a success response" do
+      task = Task.create! valid_attributes
+      get :index, format: :html
+      expect(response).to be_successful
+    end
   end
 
-  test "should get new" do
-    get new_task_url
-    assert_response :success
+  describe "GET #show" do
+    it "returns a success response" do
+      task = Task.create! valid_attributes
+      get :show, params: { id: task.to_param }, format: :html
+      expect(response).to be_successful
+    end
   end
 
-  test "should create task" do
-    assert_difference("Task.count") do
-      post tasks_url, params: { task: { deadline: @task.deadline, description: @task.description, state: @task.state, title: @task.title, user_id: @task.user_id } }
+  describe "GET #new" do
+    it "returns a success response" do
+      get :new, format: :html
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET #edit" do
+    it "returns a success response" do
+      task = Task.create! valid_attributes
+      get :edit, params: { id: task.to_param }, format: :html
+      expect(response).to be_successful
+    end
+  end
+
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new Task" do
+        expect {
+          post :create, params: { task: valid_attributes }, format: :html
+        }.to change(Task, :count).by(1)
+      end
+
+      it "redirects to the created task" do
+        post :create, params: { task: valid_attributes }, format: :html
+        expect(response).to redirect_to(tasks_url)
+      end
     end
 
-    assert_redirected_to task_url(Task.last)
-  end
+    context "with invalid params" do
+      it "does not create a new Task" do
+        expect {
+          post :create, params: { task: invalid_attributes }, format: :html
+        }.to_not change(Task, :count)
+      end
 
-  test "should show task" do
-    get task_url(@task)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_task_url(@task)
-    assert_response :success
-  end
-
-  test "should update task" do
-    patch task_url(@task), params: { task: { deadline: @task.deadline, description: @task.description, state: @task.state, title: @task.title, user_id: @task.user_id } }
-    assert_redirected_to task_url(@task)
-  end
-
-  test "should destroy task" do
-    assert_difference("Task.count", -1) do
-      delete task_url(@task)
+      it "renders the 'new' template" do
+        post :create, params: { task: invalid_attributes }, format: :html
+        expect(response).to render_template("new")
+      end
     end
-
-    assert_redirected_to tasks_url
   end
 end

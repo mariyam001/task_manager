@@ -14,7 +14,19 @@
   </head>
 
   <body>
-
-    <%= yield %>
+    <div class="">
+      <div class="pageHeader">
+        <div class="title">Task Management System</div>
+        <% if current_user.present? %>
+        <div class="userPanel">
+          <i class="">
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, :class => ' btn btn-outline-danger' %>
+          </i>
+          <span class="username"><%= current_user&.full_name%></span>
+        </div>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
   </body>
 </html>

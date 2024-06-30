@@ -4,8 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @user.email %></h1>
-
-      <p>A new task has been created: <%= @task.title %>.</p>
+    <h1>Task Deadline Alert</h1>
+    <p>Hello <%= @user.full_name %>,</p>
+    <p>This is a reminder that your task "<%= @task.title %>" is due soon.</p>
+    <p>Deadline: <%= @task.deadline.strftime('%B %d, %Y %H:%M') %></p>
+    <p>Please make sure to complete it before the deadline.</p>
+    <p>Thank you,</p>
   </body>
 </html>
+
+

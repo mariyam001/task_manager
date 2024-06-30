@@ -31,15 +31,20 @@ body {
 
 $colorBlue: rgba(84,185, 205, 1.0);
 
+.bg-blue{
+  background-color: $colorBlue;
+  color: White;
+}
+
 .pageHeader {
   width: 100%;
-  height: 50px;
+  height: 55px;
   line-height: 50px;
 
   background-color: $colorBlue;
   color: White;
 
-  padding: 5px 20px;
+  padding: 8px 20px;
   vertical-align: middle;
 
   .title {
@@ -85,7 +90,7 @@ $colorBlue: rgba(84,185, 205, 1.0);
 
   .nav {
     width: 200px;
-    height: 100%;
+    height: 100vh;
     float: left;
     
     background-color: rgba(227,234,235, 0.8);
@@ -182,32 +187,23 @@ $colorBlue: rgba(84,185, 205, 1.0);
       
       .functions {
         float: right;
+
+        .table td {
+          vertical-align: middle;
+        }
         
         .button {
           float: right;
-          height: 30px;
+          height: 35px;
           line-height: 30px;
           background-color: #AAA;
           @include border-radius(4px);
           margin: 0px 5px;
           padding: 0px 20px;
-          
           cursor: pointer;
-          color: White;
-          font-weight: 700;
           
           &.active {
             background-color: $colorBlue;
-          }
-          
-          &.inverz {
-            background-color: inherit;
-            border: 1px solid #AAA;
-            width: 10px;
-            color: #AAA;
-            font-size: 1.3em;
-            padding-left: 10px;
-            padding-right: 16px;
           }
         }
       }
@@ -219,16 +215,41 @@ $colorBlue: rgba(84,185, 205, 1.0);
       top: 70px;
       right: 0px;
       bottom: 0px;
-      padding: 10px;
+      padding: 15px;
       
       .list {
-        
+        margin: 10px;
+        padding-top: 15px;
+
         .title {
           width: 100%;
           padding: 10px;
           text-transform: uppercase;
           font-weight: 700;
           color: $colorBlue;
+        }
+        .edit-task-btn{
+          background-color: $colorBlue;
+        }
+        .task-state-backlog {
+          background-color: rgb(220 53 69 / 21%) !important;
+          padding: 3px;
+          border-radius: 4px; 
+        }
+
+        .task-state-in-progress {
+          background-color: rgb(247 216 127 / 34%) !important;
+          padding: 3px;
+          border-radius: 4px; 
+        }
+
+        .task-state-done {
+          background-color: rgb(55 219 143 / 31%) !important;
+          padding: 3px;
+          border-radius: 4px; 
+        }
+        .ml-5{
+          margin-left: 5px !important;
         }
         
         ul {
@@ -302,14 +323,53 @@ $colorBlue: rgba(84,185, 205, 1.0);
   clear: both;
 }
 
-.task-state-backlog {
-  background-color: #28a745 !important; 
+
+
+.wrapper {  
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
-.task-state-in-progress {
-  background-color: red !important; 
+.form-group{
+  margin-bottom: 10px;
 }
 
-.task-state-done {
-  background-color: #007bff !important;
+.form-signin {
+  max-width: 450px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+
+  .form-signin-heading{
+    margin-bottom: 30px;
+  }
+
+  .checkbox {
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+
+    &:focus {
+      z-index: 2;
+    }
+  }
+
+  input[type="text"], input[type="email"] {
+    margin-bottom: 10px;
+  }
+
+  input[type="password"] {
+    margin-bottom: 20px;
+    margin-top: 5px;
+  }
+  #error_explanation{
+    color: red;
+  }
 }
